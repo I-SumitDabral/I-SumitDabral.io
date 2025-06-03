@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <base href="./" />
+  <base href="./">
 
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <meta name="description" content="Sumit Dabral's portfolio showcasing Flutter projects and web development." />
 
   <!-- Mobile web app meta -->
@@ -22,7 +20,7 @@
   <title>portfolio</title>
   <link rel="manifest" href="manifest.json" />
 
-  <!-- Open Graph meta tags -->
+  <!-- Open Graph meta tags for social sharing -->
   <meta property="og:title" content="Sumit Dabral Portfolio" />
   <meta property="og:description" content="Sumit Dabral's portfolio showcasing Flutter projects and web development." />
   <meta property="og:image" content="https://sumitdabral.space/assets/assets/preview.png" />
@@ -35,34 +33,45 @@
   <meta name="twitter:description" content="Sumit Dabral's portfolio showcasing Flutter projects and web development." />
   <meta name="twitter:image" content="https://sumitdabral.space/assets/assets/preview.png" />
 
-  <!-- Lottie Web Script -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
+  <!-- Lottie script -->
+  <script src="https://unpkg.com/lottie-web/build/player/lottie.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    #lottie {
+      width: 200px;
+      height: 200px;
+    }
+  </style>
 </head>
 
 <body>
-  <!-- Lottie Loader -->
-  <div id="lottie-loader" style="position:fixed;top:0;left:0;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;background:white;z-index:9999;">
-    <div id="lottie" style="width:200px;height:200px;"></div>
-  </div>
+  <!-- Lottie animation container -->
+  <div id="lottie"></div>
 
-  <!-- Flutter app bootstrap -->
+  <!-- Flutter app -->
   <script src="flutter_bootstrap.js" async></script>
 
   <script>
-    // Lottie animation setup
-    lottie.loadAnimation({
-      container: document.getElementById('lottie'),
-      renderer: 'svg',
+    const lottieContainer = document.getElementById("lottie");
+    const animation = lottie.loadAnimation({
+      container: lottieContainer,
+      renderer: "svg",
       loop: true,
       autoplay: true,
-      // You can host this JSON or put it in your web/assets folder
-      path: "assets/assets/loader.json" // make sure this file exists at this exact path
+      path: "assets/assets/loading.json", // Ensure this path is correct
     });
 
-    // Hide loader when Flutter is ready
-    window.addEventListener('flutter-first-frame', function () {
-      const loader = document.getElementById('lottie-loader');
-      if (loader) loader.style.display = 'none';
+    // Hide loader once Flutter is ready
+    window.addEventListener("flutter-first-frame", () => {
+      lottieContainer.style.display = "none";
     });
   </script>
 </body>
